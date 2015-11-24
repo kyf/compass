@@ -47,9 +47,9 @@
     <li><input name="" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
     <li><input name="" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''"/></li>
     <li class="yzm">
-	<span><input name="" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite><img src="/checkcode" /></cite> 
+	<span><input name="" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite><img src="/checkcode" id="checkcode" style="cursor:pointer;" /></cite> 
     </li>
-    <li><input name="" type="button" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
+    <li><input name="" type="button" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'" /><label style="display:none;"><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label style="display:none;"><a href="#">忘记密码？</a></label></li>
     </ul>
     
     
@@ -64,3 +64,4 @@
 </body>
 
 </html>
+<script type="text/javascript" src="js/page/login.js"></script>
