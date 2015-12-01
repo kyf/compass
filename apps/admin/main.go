@@ -18,13 +18,13 @@ func main() {
 	m.Get("/", func() string {
 		return "server is running ..."
 	})
-	m.Use(martini.Static("./static/"))
+	m.Use(martini.Static("../../admin/static/"))
 	m.Get("/checkcode", func(r *http.Request, w http.ResponseWriter) {
 		captcha.WriteImage(w, captcha.New(), 110, 40)
 	})
 	m.Get("/login", func(w http.ResponseWriter, logger *log.Logger) {
 		var t *template.Template
-		t, err := template.ParseFiles("./static/html/login.html")
+		t, err := template.ParseFiles("../../admin/static/html/login.html")
 		if err != nil {
 			log.Fatal(err)
 		}
