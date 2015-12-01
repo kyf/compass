@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/kyf/compass/data"
 	"log"
 	"net/http"
 )
@@ -12,7 +13,15 @@ func (app *app_list) String() string {
 }
 
 func (app *app_list) Handle(r *http.Request, w http.ResponseWriter, logger *log.Logger) {
-	w.Write([]byte("asdasdad"))
+	data.InitLogger(logger)
+	apps := &data.App{}
+	code := 1000
+	ds := apps.List()
+	if ds == nil {
+		code = 4000
+	}
+	result, _ := format(code, ds)
+	w.Write(result)
 }
 
 func init() {

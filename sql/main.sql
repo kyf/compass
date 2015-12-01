@@ -16,7 +16,8 @@ create table `app`(
 	`id` int(11) primary key auto_increment comment 'primary key',
 	`name` varchar(250) not null comment 'app name',
 	`icon` varchar(250) not null default '' comment 'app icon url',
-	`desc` text comment 'app description'
+	`desc` text comment 'app description',
+	`apk` varchar(300) not null default '' comment 'app apk url'
 )engine=InnoDB default charset=utf8 comment 'app main table'
 //
 

@@ -13,13 +13,22 @@ const (
 	DB_USER     string = "root"
 	DB_PWD      string = "123456"
 	DB_NAME     string = "compass"
+	DB_DRIVER   string = "mysql"
 )
 
-func initDB() {
+var (
+	dbHandler *sql.DB
+)
+
+func initDB() *sql.DB {
+	if dbHandler != nil {
+		return dbHandler
+	}
 	dsn := fmt.Sprintf("%s:%s@%s(%s)/%s?charset=utf8", DB_USER, DB_PWD, DB_PROTOCOL, fmt.Sprintf("%s:%s", DB_HOST, DB_PORT), DB_NAME)
-	dbHandler, err := sql.Open(dsn)
+	var err error
+	dbHandler, err = sql.Open(DB_DRIVER, dsn)
 	if err != nil {
 		logger.Fatalf("init db failure! err is %v", err)
 	}
-
+	return dbHandler
 }

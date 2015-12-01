@@ -14,8 +14,13 @@ func (a *ad_is_show) String() string {
 
 func (a *ad_is_show) Handle(r *http.Request, w http.ResponseWriter, logger *log.Logger) {
 	code := 1000
+	dal.InitLogger(logger)
 	setting := &dal.Setting{}
 	setting.Read()
+
+	if setting.AdShow == 1 {
+		code = 4000
+	}
 
 	echostr, err := format(code, nil)
 	if err != nil {
