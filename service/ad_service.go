@@ -1,6 +1,7 @@
 package service
 
 import (
+	dal "github.com/kyf/compass/data"
 	"log"
 	"net/http"
 )
@@ -13,6 +14,9 @@ func (a *ad_is_show) String() string {
 
 func (a *ad_is_show) Handle(r *http.Request, w http.ResponseWriter, logger *log.Logger) {
 	code := 1000
+	setting := &dal.Setting{}
+	setting.Read()
+
 	echostr, err := format(code, nil)
 	if err != nil {
 		logger.Printf("err is %v", err)
