@@ -44,12 +44,12 @@
     <div class="loginbox loginbox1">
     
     <ul>
-    <li><input name="" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
-    <li><input name="" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''"/></li>
+    <li><input id="username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
+    <li><input id="password" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''"/></li>
     <li class="yzm">
-	<span><input name="" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite><img src="/checkcode" id="checkcode" style="cursor:pointer;" /></cite> 
+	<span><input id="checkcode_text" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite><img src="/checkcode" id="checkcode" style="cursor:pointer;" /></cite> 
     </li>
-    <li><input name="" type="button" class="loginbtn" value="登录"  onclick="javascript:window.location='main'" /><label style="display:none;"><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label style="display:none;"><a href="#">忘记密码？</a></label></li>
+    <li><input id="submitbt" type="button" class="loginbtn" value="登录"  /><label style="display:none;"><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label style="display:none;"><a href="#">忘记密码？</a></label></li>
     </ul>
     
     
