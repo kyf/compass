@@ -62,7 +62,7 @@ func main() {
 	})
 
 	m.Get("/checkcode", func(r *http.Request, w http.ResponseWriter, s sessions.Session) {
-		code := captcha.New()
+		code := captcha.NewLen(4)
 		s.Set("checkcode", code)
 		captcha.WriteImage(w, code, 110, 40)
 	})

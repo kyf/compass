@@ -1,8 +1,8 @@
 package admin
 
 import (
-	"fmt"
 	"github.com/dchest/captcha"
+	"github.com/kyf/compass/data"
 	"github.com/martini-contrib/sessions"
 	"log"
 	"net/http"
@@ -15,12 +15,16 @@ func login(w http.ResponseWriter, r *http.Request, s sessions.Session, logger *l
 	checkcode := r.PostForm.Get("checkcode")
 
 	code := s.Get("checkcode")
-	if !captcha.VerifyString(checkcode, code.(string)) {
-		w.Write([]byte("check is wrong"))
+	if !captcha.VerifyString(code.(string), checkcode) {
+		w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "checkcode is wrong"}))
 	} else {
-		w.Write([]byte("check right"))
+		user := &data.User{}
+		if user.Check(username, password) {
+			w.Write(jsonResponse(map[string]interface{}{"status": true, "msg": "success"}))
+		} else {
+			w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "username or password is wrong"}))
+		}
 	}
-	w.Write([]byte(fmt.Sprintf("%s, %s", username, password)))
 }
 
 func logout(w http.ResponseWriter, r *http.Request, s sessions.Session, logger *log.Logger) {
