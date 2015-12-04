@@ -20,7 +20,7 @@ var (
 	dbHandler *sql.DB
 )
 
-func initDB() *sql.DB {
+func initDB() (*sql.DB, error) {
 	if dbHandler != nil {
 		return dbHandler
 	}
@@ -28,7 +28,7 @@ func initDB() *sql.DB {
 	var err error
 	dbHandler, err = sql.Open(DB_DRIVER, dsn)
 	if err != nil {
-		logger.Fatalf("init db failure! err is %v", err)
+		return nil, err
 	}
-	return dbHandler
+	return dbHandler, nil
 }

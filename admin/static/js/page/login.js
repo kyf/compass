@@ -15,12 +15,17 @@ $(document).ready(function(){
 			type:'POST',
 			data:{
 				'username':$('#username').val(),
-			'password':$('#password').val(),
-			'checkcode':$('#checkcode_text').val()
+				'password':$('#password').val(),
+				'checkcode':$('#checkcode_text').val()
 			},
 			dataType:'json',
 			success:function(data, status, response){
-
+				if(data.status){
+					window.location.href = '/main';	
+				}else{
+					checkcode.click();
+					alert(data.msg);
+				}
 			}
 		});
 	};

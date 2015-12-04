@@ -16,19 +16,21 @@ func login(w http.ResponseWriter, r *http.Request, s sessions.Session, logger *l
 
 	code := s.Get("checkcode")
 	if !captcha.VerifyString(code.(string), checkcode) {
-		w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "checkcode is wrong"}))
+		w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "验证码错误"}))
 	} else {
 		user := &data.User{}
 		if user.Check(username, password) {
+			s.Set("useradmin", username)
 			w.Write(jsonResponse(map[string]interface{}{"status": true, "msg": "success"}))
 		} else {
-			w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "username or password is wrong"}))
+			w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "用户名或密码错误"}))
 		}
 	}
 }
 
 func logout(w http.ResponseWriter, r *http.Request, s sessions.Session, logger *log.Logger) {
-
+	s.Delete("useradmin")
+	w.Write(jsonResponse(map[string]interface{}{"status": true, "msg": "success"}))
 }
 
 func init() {

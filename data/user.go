@@ -4,11 +4,13 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
+	"log"
 )
 
 type User struct {
 	AdminName string `json:"admin_name"`
 	AdminPwd  string `json:"admin_pwd"`
+	Logger    *log.Logger
 }
 
 func (u *User) Check(adminName, adminPwd string) bool {
@@ -19,7 +21,7 @@ func (u *User) Check(adminName, adminPwd string) bool {
 	hex.Encode(tmp, bin[:])
 	rows, err := db.Query(fmt.Sprintf(sql, adminName, string(tmp)))
 	if err != nil {
-		logger.Printf("Check err: sql is %s, err is %v", sql, err)
+		s.Logger.Printf("Check err: sql is %s, err is %v", sql, err)
 		return false
 	}
 

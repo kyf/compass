@@ -1,10 +1,14 @@
 package data
 
-import ()
+import (
+	"fmt"
+	"log"
+)
 
 type Setting struct {
 	Id     int `json:"id"`
 	AdShow int `json:"ad_show"`
+	Logger *log.Logger
 }
 
 func (s *Setting) Read() {
@@ -12,7 +16,7 @@ func (s *Setting) Read() {
 	sql := "select `id`, `ad_show` from `setting` limit 1"
 	rows, err := db.Query(sql)
 	if err != nil {
-		logger.Printf("sql error: sql is %s, err is %v", sql, err)
+		s.Logger.Printf("sql error: sql is %s, err is %v", sql, err)
 		return
 	}
 	defer rows.Close()
@@ -21,7 +25,7 @@ func (s *Setting) Read() {
 		var ad_show int
 		err = rows.Scan(&id, &ad_show)
 		if err != nil {
-			logger.Printf("scan error: err is %v", err)
+			s.Logger.Printf("scan error: err is %v", err)
 			return
 		}
 		s.Id = id
@@ -29,6 +33,13 @@ func (s *Setting) Read() {
 	}
 }
 
-func (s *Setting) Write() {
-
+func (s *Setting) Write(state int) {
+	db := initDB()
+	sql := "update `setting` set `ad_show` = %d "
+	s.Read()
+	if s.Id == 0 {
+		sql = "insert into `setting`(`ad_show`)values(%d)"
+	}
+	_, err := db.Exec(fmt.Sprintf(sql, state))
+	s.Logger.Printf("sql error: sql is %s, err is %v", sql, err)
 }
