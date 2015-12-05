@@ -13,8 +13,7 @@ func (app *app_list) String() string {
 }
 
 func (app *app_list) Handle(r *http.Request, w http.ResponseWriter, logger *log.Logger) {
-	data.InitLogger(logger)
-	apps := &data.App{}
+	apps := &data.App{Logger: logger}
 	code := 1000
 	ds := apps.List()
 	if ds == nil {

@@ -18,7 +18,7 @@ func login(w http.ResponseWriter, r *http.Request, s sessions.Session, logger *l
 	if !captcha.VerifyString(code.(string), checkcode) {
 		w.Write(jsonResponse(map[string]interface{}{"status": false, "msg": "验证码错误"}))
 	} else {
-		user := &data.User{}
+		user := &data.User{Logger: logger}
 		if user.Check(username, password) {
 			s.Set("useradmin", username)
 			w.Write(jsonResponse(map[string]interface{}{"status": true, "msg": "success"}))

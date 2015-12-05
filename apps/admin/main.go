@@ -13,8 +13,9 @@ import (
 )
 
 const (
-	SERVER_ADDR  string = ":9969"
-	SCRIPT_LOGIN string = "<script type='text/javascript'>window.location.href='/login'</script>"
+	SERVER_ADDR   string = ":9969"
+	SCRIPT_LOGIN  string = "<script type='text/javascript'>window.location.href='/login'</script>"
+	APP_STORE_DIR string = "/work/compass/app/"
 )
 
 func isLogin(w http.ResponseWriter, r *http.Request, s sessions.Session) bool {
@@ -54,6 +55,7 @@ func main() {
 	m := martini.Classic()
 
 	m.Use(martini.Static("../../admin/static/"))
+	m.Use(martini.Static(APP_STORE_DIR))
 	m.Use(sessions.Sessions("compass_session", sessions.NewCookieStore([]byte("compass_session_cookie"))))
 
 	m.Get("/", func(w http.ResponseWriter) string {

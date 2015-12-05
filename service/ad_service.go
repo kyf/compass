@@ -14,8 +14,7 @@ func (a *ad_is_show) String() string {
 
 func (a *ad_is_show) Handle(r *http.Request, w http.ResponseWriter, logger *log.Logger) {
 	code := 1000
-	dal.InitLogger(logger)
-	setting := &dal.Setting{}
+	setting := &dal.Setting{Logger: logger}
 	setting.Read()
 
 	if setting.AdShow == 1 {

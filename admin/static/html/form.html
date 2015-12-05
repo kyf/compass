@@ -12,7 +12,7 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="#">首页</a></li>
-    <li><a href="#">表单</a></li>
+    <li><a href="#">编辑应用</a></li>
     </ul>
     </div>
     
@@ -21,18 +21,22 @@
     <div class="formtitle"><span>基本信息</span></div>
     
     <ul class="forminfo">
-    <li><label>文章标题</label><input name="" type="text" class="dfinput" /><i>标题不能超过30个字符</i></li>
-    <li><label>关键字</label><input name="" type="text" class="dfinput" /><i>多个关键字用,隔开</i></li>
-    <li><label>是否审核</label><cite><input name="" type="radio" value="" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio" value="" />否</cite></li>
-    <li><label>引用地址</label><input name="" type="text" class="dfinput" value="http://www.uimaker.com/uimakerhtml/uidesign/" /></li>
-    <li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>
-    <li><label>&nbsp;</label><input name="" type="button" class="btn" value="确认保存"/></li>
+		<form id="myform" target="myiframe" action="/action/app/add" enctype="multipart/form-data" method="post">
+    <li><label>应用名称</label><input id="app_name" name="app_name" type="text" class="dfinput" /><i>标题不能超过30个字符</i></li>
+    <li><label>缩略图</label><input id="app_icon" name="app_icon" type="file" style="margin-top:5px;" /></li>
+    <li><label>APK文件</label><input id="app_apk" name="app_apk" type="file" style="margin-top:5px;" /></li>
+    <li><label>应用描述</label><textarea id="app_desc" name="app_desc" cols="" rows="" class="textinput"></textarea></li>
+    <li><label>&nbsp;</label><input id="app_submitbt" type="button" class="btn" value="确认保存"/></li>
+	<input type="hidden" id="app_id" name="app_id" value="" />
+		</form>
     </ul>
     
     
     </div>
-
+	<iframe src="about:blank" name="myiframe" ></iframe>
 
 </body>
 
 </html>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/page/addapp.js"></script>

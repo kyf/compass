@@ -22,7 +22,7 @@ var (
 
 func initDB() (*sql.DB, error) {
 	if dbHandler != nil {
-		return dbHandler
+		return dbHandler, nil
 	}
 	dsn := fmt.Sprintf("%s:%s@%s(%s)/%s?charset=utf8", DB_USER, DB_PWD, DB_PROTOCOL, fmt.Sprintf("%s:%s", DB_HOST, DB_PORT), DB_NAME)
 	var err error
